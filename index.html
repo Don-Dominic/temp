@@ -1,13 +1,122 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
-    <title>Ping Pong Game</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-    <canvas id="canvas"></canvas>
-    <script src="script.js"></script>
-    <p>Check out my favorite website <a href="https://fundraise.cancerresearchuk.org/page/ddominic">here</a>!</p>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Football Game</title>
+    <style>
+        #field {
+            width: 100%;
+            height: 300px;
+            background-color: green;
+            position: relative;
+        }
+        .player {
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .team1 {
+            background-color: blue;
+        }
+        .team2 {
+            background-color: red;
+        }
+        .ball {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .goalpost {
+            width: 10px;
+            height: 50px;
+            background-color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="field">
+        <div class="goalpost" style="left: 0; top: 125px;"></div>
+        <div class="goalpost" style="right: 0; top: 125px;"></div>
+        <div class="ball" id="ball" style="left: 50%; top: 50%;"></div>
+    </div>
+    <button onclick="passBall(1)">Team 1 Pass</button>
+    <button onclick="passBall(2)">Team 2 Pass</button>
+    <p>Team 1 Goals: <span id="team1Goals">0</span></p>
+    <p>Team 2 Goals: <span id="team2Goals">0</span></p>
+
+    <script>
+        const field = document.getElementById('field');
+        const ball = document.getElementById('ball');
+        const team1Goals = document.getElementById('team1Goals');
+        const team2Goals = document.getElementById('team2Goals');
+        
+
+        function createPlayer(team, x, y) {
+            const player = document.createElement('div');
+            player.classList.add('player');
+            player.classList.add(`team${team}`);
+            player.style.left = `${x}px`;
+            player.style.top = `${y}px`;
+            field.appendChild(player);
+            return player;
+        }
+
+        function createPlayers() {
+    const players = [];
+    for (let i = 0; i < 11; i++) {
+        players.push(createPlayer(1, Math.random() * field.clientWidth, Math.random() * field.clientHeight));
+        players.push(createPlayer(2, Math.random() * field.clientWidth, Math.random() * field.clientHeight));
+    }
+    return players;
+}
+
+        function movePlayers(players) {
+            players.forEach(player => {
+                const dx = (Math.random() * 2 - 1) * 5;
+                const dy = (Math.random() * 2 - 1) * 5;
+                const x = parseFloat(player.style.left) + dx;
+                const y = parseFloat(player.style.top) + dy;
+                player.style.left = `${Math.min(Math.max(x, 0), field.clientWidth - 10)}px`;
+                player.style.top = `${Math.min(Math.max(y, 0), field.clientHeight - 10)}px`;
+            });
+        }
+
+
+        let team1Passes = 0;
+let team2Passes = 0;
+
+function passBall(team) {
+    const ballX = parseFloat(ball.style.left);
+    const ballY = parseFloat(ball.style.top);
+    const goalpostY = 125;
+    const goalpostHeight = 50;
+    const players = document.querySelectorAll(`.team${team}`);
+    const targetPlayer = players[Math.floor(Math.random() * players.length)];
+    ball.style.left = targetPlayer.style.left;
+    ball.style.top = targetPlayer.style.top;
+
+    if (team === 1) {
+        team1Passes++;
+        if (team1Passes === 5) {
+            team1Goals.textContent = parseInt(team1Goals.textContent) + 1;
+            team1Passes = 0;
+        }
+    } else if (team === 2) {
+        team2Passes++;
+        if (team2Passes === 5) {
+            team2Goals.textContent = parseInt(team2Goals.textContent) + 1;
+            team2Passes = 0;
+        }
+    }
+}
+
+        const players = createPlayers();
+        setInterval(() => movePlayers(players), 100);
+    </script>
+</body>
 </html>
