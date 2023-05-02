@@ -1,8 +1,223 @@
-body {
-  margin: 0;
-  padding: 0;
-}
+      body {
+            margin: 0;
+            display: flex;
+            max-width: 1000px;
+            justify-content: center;
+            align-items: center;
+        }
 
-canvas {
-  display: block;
-}
+        .stack-panel {
+            width: 90%;
+            display: flex;
+
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .field-container {
+
+            margin-top: 05%;
+            height: 300px;
+            width: 90%;
+            position: center;
+
+        }
+
+        .field {
+
+            height: 100%;
+            width: 100%;
+            background-color: #567d46;
+            opacity: 0.7;
+            border-radius: 16px;
+            position: relative;
+        }
+
+
+
+        .midline {
+            height: 100%;
+            width: 2px;
+            background-color: #efe;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .center-circle {
+            height: 109.6px;
+            width: 109.6px;
+            border: 3px solid #efe;
+            border-radius: 50%;
+            background-color: transparent;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .penalty-box {
+            height: 170px;
+            width: 100px;
+            border: 3px solid #efe;
+            background-color: transparent;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .penalty-box.left {
+            left: 0;
+        }
+
+        .penalty-box.right {
+            right: 0;
+        }
+
+
+
+
+
+        .goal {
+            height: 30%;
+            width: 5%;
+            background-color: #567d46;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .goal.left {
+            left: -3%;
+        }
+
+        .goal.right {
+            right: -3%;
+            ;
+        }
+
+
+
+
+
+
+        .goal-area {
+            height: 40%;
+            width: 5%;
+            border: 3px solid #efe;
+            background-color: transparent;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .goal-area.left {
+            left: 0;
+        }
+
+        .goal-area.right {
+            right: 0;
+        }
+
+        .corner-arc {
+            height: 10px;
+            width: 10px;
+            border: 3px solid #efe;
+            border-radius: 70%;
+            background-color: transparent;
+            position: absolute;
+        }
+
+        .corner-arc.tl {
+            top: 0;
+            left: 0;
+            border-top: none;
+            border-left: none;
+        }
+
+        .corner-arc.tr {
+            top: 0;
+            right: 0;
+            border-top: none;
+            border-right: none;
+        }
+
+        .corner-arc.bl {
+            bottom: 0;
+            left: 0;
+            border-bottom: none;
+            border-left: none;
+        }
+
+        .corner-arc.br {
+            bottom: 0;
+            right: 0;
+            border-bottom: none;
+            border-right: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .container {
+            position: relative;
+            width: 99%;
+            height: 97%;
+            border: 0px solid black;
+        }
+
+        .ball {
+            position: absolute;
+            border-radius: 50%;
+            width: 12px;
+            height: 10px;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+        .green {
+            background-color: #05560D;
+        }
+
+        .white {
+            background-color: white;
+        }
+
+        .button1 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #05560D;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10%;
+        }
+
+        .button2 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: red;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10%;
+        }
