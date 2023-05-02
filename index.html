@@ -1,122 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Football Game</title>
+    <title>Football Field</title>
     <style>
-        #field {
-            width: 100%;
+        body {
+            margin: 0;
+            display: flex;
+            max-width: 1000px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stack-panel {
+            width: 90%;
+            display: flex;
+
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        .field-container {
+
+            margin-top: 05%;
             height: 300px;
-            background-color: green;
+            width: 90%;
+            position: center;
+
+        }
+
+        .field {
+
+            height: 100%;
+            width: 100%;
+            background-color: #567d46;
+            opacity: 0.7;
+            border-radius: 16px;
             position: relative;
         }
-        .player {
-            width: 10px;
+
+
+
+        .midline {
+            height: 100%;
+            width: 2px;
+            background-color: #efe;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .center-circle {
+            height: 109.6px;
+            width: 109.6px;
+            border: 3px solid #efe;
+            border-radius: 50%;
+            background-color: transparent;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .penalty-box {
+            height: 170px;
+            width: 100px;
+            border: 3px solid #efe;
+            background-color: transparent;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .penalty-box.left {
+            left: 0;
+        }
+
+        .penalty-box.right {
+            right: 0;
+        }
+
+
+
+
+
+        .goal {
+            height: 30%;
+            width: 5%;
+            background-color: #567d46;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .goal.left {
+            left: -3%;
+        }
+
+        .goal.right {
+            right: -3%;
+            ;
+        }
+
+
+
+
+
+
+        .goal-area {
+            height: 40%;
+            width: 5%;
+            border: 3px solid #efe;
+            background-color: transparent;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .goal-area.left {
+            left: 0;
+        }
+
+        .goal-area.right {
+            right: 0;
+        }
+
+        .corner-arc {
             height: 10px;
+            width: 10px;
+            border: 3px solid #efe;
+            border-radius: 70%;
+            background-color: transparent;
+            position: absolute;
+        }
+
+        .corner-arc.tl {
+            top: 0;
+            left: 0;
+            border-top: none;
+            border-left: none;
+        }
+
+        .corner-arc.tr {
+            top: 0;
+            right: 0;
+            border-top: none;
+            border-right: none;
+        }
+
+        .corner-arc.bl {
+            bottom: 0;
+            left: 0;
+            border-bottom: none;
+            border-left: none;
+        }
+
+        .corner-arc.br {
+            bottom: 0;
+            right: 0;
+            border-bottom: none;
+            border-right: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .container {
+            position: relative;
+            width: 99%;
+            height: 97%;
+            border: 0px solid black;
+        }
+
+        .ball {
             position: absolute;
             border-radius: 50%;
+            width: 12px;
+            height: 10px;
         }
-        .team1 {
-            background-color: blue;
-        }
-        .team2 {
+
+        .red {
             background-color: red;
         }
-        .ball {
-            width: 20px;
-            height: 20px;
-            background-color: white;
-            position: absolute;
-            border-radius: 50%;
+
+        .green {
+            background-color: #05560D;
         }
-        .goalpost {
-            width: 10px;
-            height: 50px;
+
+        .white {
             background-color: white;
-            position: absolute;
+        }
+
+        .button1 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #05560D;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10%;
+        }
+
+        .button2 {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: red;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10%;
         }
     </style>
 </head>
+
 <body>
-    <div id="field">
-        <div class="goalpost" style="left: 0; top: 125px;"></div>
-        <div class="goalpost" style="right: 0; top: 125px;"></div>
-        <div class="ball" id="ball" style="left: 50%; top: 50%;"></div>
+    <div class="stack-panel">
+        <div class="field-container">
+            <div class="field">
+                <div class="midline"></div>
+                <div class="center-circle"></div>
+                <div class="penalty-box left"></div>
+                <div class="penalty-box right"></div>
+                <div class="goal left"></div>
+                <div class="goal right"></div>
+                <div class="goal-area left"></div>
+                <div class="goal-area right"></div>
+                <div class="corner-arc tl"></div>
+                <div class="corner-arc tr"></div>
+                <div class="corner-arc bl"></div>
+                <div class="corner-arc br"></div>
+                <div class="container" id="container"></div>
+            </div>
+        </div>
+        <div>
+            <a href="https://fundraise.cancerresearchuk.org/page/ddominic" class="button1"> Pass to Celtic</a>
+        </div>
+        <div>
+            <a href="https://fundraise.cancerresearchuk.org/page/ddominic" class="button2">Pass to Ranger</a>
+        </div>
     </div>
-    <button onclick="passBall(1)">Team 1 Pass</button>
-    <button onclick="passBall(2)">Team 2 Pass</button>
-    <p>Team 1 Goals: <span id="team1Goals">0</span></p>
-    <p>Team 2 Goals: <span id="team2Goals">0</span></p>
 
     <script>
-        const field = document.getElementById('field');
-        const ball = document.getElementById('ball');
-        const team1Goals = document.getElementById('team1Goals');
-        const team2Goals = document.getElementById('team2Goals');
-        
-
-        function createPlayer(team, x, y) {
-            const player = document.createElement('div');
-            player.classList.add('player');
-            player.classList.add(`team${team}`);
-            player.style.left = `${x}px`;
-            player.style.top = `${y}px`;
-            field.appendChild(player);
-            return player;
+        function createBalls(color, count) {
+            for (let i = 0; i < count; i++) {
+                const ball = document.createElement('div');
+                ball.classList.add('ball', color);
+                document.getElementById('container').appendChild(ball);
+            }
         }
 
-        function createPlayers() {
-    const players = [];
-    for (let i = 0; i < 11; i++) {
-        players.push(createPlayer(1, Math.random() * field.clientWidth, Math.random() * field.clientHeight));
-        players.push(createPlayer(2, Math.random() * field.clientWidth, Math.random() * field.clientHeight));
-    }
-    return players;
-}
+        createBalls('red', 10);
+        createBalls('green', 10);
+        createBalls('white', 1);
 
-        function movePlayers(players) {
-            players.forEach(player => {
-                const dx = (Math.random() * 2 - 1) * 5;
-                const dy = (Math.random() * 2 - 1) * 5;
-                const x = parseFloat(player.style.left) + dx;
-                const y = parseFloat(player.style.top) + dy;
-                player.style.left = `${Math.min(Math.max(x, 0), field.clientWidth - 10)}px`;
-                player.style.top = `${Math.min(Math.max(y, 0), field.clientHeight - 10)}px`;
+        function getRandomArbitrary(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function moveBalls() {
+            const container = document.getElementById('container');
+            const balls = container.querySelectorAll('.ball');
+            const containerWidth = container.clientWidth;
+            const containerHeight = container.clientHeight;
+            const ballSize = 15;
+
+            balls.forEach(ball => {
+                const x = getRandomArbitrary(0, containerWidth - ballSize);
+                const y = getRandomArbitrary(0, containerHeight - ballSize);
+                ball.style.transform = `translate(${x}px, ${y}px)`;
             });
         }
 
-
-        let team1Passes = 0;
-let team2Passes = 0;
-
-function passBall(team) {
-    const ballX = parseFloat(ball.style.left);
-    const ballY = parseFloat(ball.style.top);
-    const goalpostY = 125;
-    const goalpostHeight = 50;
-    const players = document.querySelectorAll(`.team${team}`);
-    const targetPlayer = players[Math.floor(Math.random() * players.length)];
-    ball.style.left = targetPlayer.style.left;
-    ball.style.top = targetPlayer.style.top;
-
-    if (team === 1) {
-        team1Passes++;
-        if (team1Passes === 5) {
-            team1Goals.textContent = parseInt(team1Goals.textContent) + 1;
-            team1Passes = 0;
-        }
-    } else if (team === 2) {
-        team2Passes++;
-        if (team2Passes === 5) {
-            team2Goals.textContent = parseInt(team2Goals.textContent) + 1;
-            team2Passes = 0;
-        }
-    }
-}
-
-        const players = createPlayers();
-        setInterval(() => movePlayers(players), 100);
+        setInterval(moveBalls, 1000);
     </script>
 </body>
+
 </html>
