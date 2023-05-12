@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,32 +11,30 @@
             max-width: 1000px;
             justify-content: center;
             align-items: center;
+            background-color: #2e3440;
         }
 
         .stack-panel {
-            width: 90%;
+            width: 100%;
             display: flex;
-
             flex-direction: column;
             align-items: center;
             justify-content: center;
+
         }
 
 
         .field-container {
-
-            margin-top: 05%;
+            margin-left: 50%;
             height: 300px;
-            width: 90%;
+            width: 100%;
             position: center;
-
         }
 
         .field {
-
             height: 100%;
             width: 100%;
-            background-color: #567d46;
+            background-color: green;
             opacity: 0.7;
             border-radius: 16px;
             position: relative;
@@ -74,6 +70,7 @@
             background-color: transparent;
             position: absolute;
             top: 50%;
+            border-radius: 5%;
             transform: translateY(-50%);
         }
 
@@ -85,15 +82,12 @@
             right: 0;
         }
 
-
-
-
-
         .goal {
             height: 30%;
             width: 5%;
-            background-color: #567d46;
+            background-color: green;
             position: absolute;
+            border-radius: 5%;
             top: 50%;
             transform: translateY(-50%);
         }
@@ -106,11 +100,6 @@
             right: -3%;
             ;
         }
-
-
-
-
-
 
         .goal-area {
             height: 40%;
@@ -169,7 +158,6 @@
 
         button {
             background-color: #4CAF50;
-            /* Green */
             border: none;
             color: white;
             padding: 15px 32px;
@@ -183,61 +171,90 @@
 
         .container {
             position: relative;
-            width: 99%;
-            height: 97%;
+            width: 100%;
+            height: 100%;
             border: 0px solid black;
         }
 
-        .ball {
-            position: absolute;
-            border-radius: 50%;
-            width: 12px;
-            height: 10px;
-        }
-
-        .red {
-            background-color: red;
-        }
-
-        .green {
-            background-color: #05560D;
-        }
-
-        .white {
-            background-color: white;
-        }
-
         .button1 {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #05560D;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10%;
+        font-family: Sans-Serif;
+        position: absolute;
+		left: 15%;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 2%;
+        background-color: #26282d;
         }
 
         .button2 {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: red;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 10%;
+        font-family: Sans-Serif;
+        position: absolute;
+        right: 18%;
+        display: inline-block;
+        padding: 10px 20px;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 2%;
+        background-color: #26282d;
+
         }
+
+
+
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        img {
+      width: 15%; /* Set the width to 50% of the container */
+      height: auto; /* Maintain aspect ratio */
+      padding: 2%;
+    }
+
+    h1 {
+font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+color: #efe;
+  display: flex;
+  margin-left: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+    
+    p1 {
+        font-family: Sans-Serif;
+
+  display: flex;
+  margin-left: 50%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
     </style>
 </head>
 
 <body>
     <div class="stack-panel">
+        <h1> Cancer Research Charity Match        </h1>
+        <p1>
+            <img src="c.svg" alt="SVG Image">
+            <img src="r.svg" alt="SVG Image">
+        </p1>
+
         <div class="field-container">
             <div class="field">
                 <div class="midline"></div>
+                <canvas id="canvas"></canvas>
                 <div class="center-circle"></div>
                 <div class="penalty-box left"></div>
                 <div class="penalty-box right"></div>
@@ -249,49 +266,115 @@
                 <div class="corner-arc tr"></div>
                 <div class="corner-arc bl"></div>
                 <div class="corner-arc br"></div>
-                <div class="container" id="container"></div>
             </div>
+
         </div>
         <div>
-            <a href="https://fundraise.cancerresearchuk.org/page/ddominic" class="button1"> Pass to Celtic</a>
-        </div>
-        <div>
+            <a href="https://fundraise.cancerresearchuk.org/page/ddominic" class="button1">Pass to Celtic</a>
             <a href="https://fundraise.cancerresearchuk.org/page/ddominic" class="button2">Pass to Ranger</a>
         </div>
     </div>
 
     <script>
-        function createBalls(color, count) {
-            for (let i = 0; i < count; i++) {
-                const ball = document.createElement('div');
-                ball.classList.add('ball', color);
-                document.getElementById('container').appendChild(ball);
-            }
-        }
+        var canvas = document.getElementById('canvas');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-        createBalls('red', 10);
-        createBalls('green', 10);
-        createBalls('white', 1);
+        var balls = [];
 
-        function getRandomArbitrary(min, max) {
-            return Math.random() * (max - min) + min;
-        }
-
-        function moveBalls() {
-            const container = document.getElementById('container');
-            const balls = container.querySelectorAll('.ball');
-            const containerWidth = container.clientWidth;
-            const containerHeight = container.clientHeight;
-            const ballSize = 15;
-
-            balls.forEach(ball => {
-                const x = getRandomArbitrary(0, containerWidth - ballSize);
-                const y = getRandomArbitrary(0, containerHeight - ballSize);
-                ball.style.transform = `translate(${x}px, ${y}px)`;
+        // create 10 red balls
+        for (var i = 0; i < 10; i++) {
+            balls.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                dx: 1,
+                dy: 1,
+                delta: 1,
+                max: 11,
+                radius: 10,
+                color: '#FF0000'
             });
         }
 
-        setInterval(moveBalls, 1000);
+        // create 10 green balls
+        for (var i = 0; i < 10; i++) {
+            balls.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                dx: 0,
+                dy: 0,
+                delta: 1,
+                max: 1,
+                radius: 10,
+                color: '#00FF00'
+            });
+        }
+
+        // create 1 black ball
+        balls.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            dx: Math.random() * 10,
+            dy: Math.random() * 10,
+            delta: 200,
+            max: 150,
+            radius: 10,
+            color: '#000000'
+        });
+
+        var cxt = canvas.getContext('2d');
+
+        canvas.addEventListener("click", togglestart);
+
+        var interval;
+
+        function togglestart() {
+            if (interval == undefined) interval = window.setInterval(animate, 1000 / 60); // 60 FPS
+            else {
+                interval = clearInterval(interval);
+                console.log(interval);
+            }
+        }
+
+        var interval = window.setInterval(animate, 1000 / 60);
+
+        function animate() {
+            cxt.clearRect(0, 0, canvas.width, canvas.height); // clear canvas
+
+            // Find the black ball
+            var blackBall = balls.find(ball => ball.color === '#000000');
+
+            for (var i = 0; i < balls.length; i++) {
+                var ball = balls[i];
+
+                if (ball.color !== '#000000') {
+                    // Calculate direction vector towards the black ball
+                    var directionX = blackBall.x - ball.x;
+                    var directionY = blackBall.y - ball.y;
+
+                    // Normalize the direction vector
+                    var distance = Math.sqrt(directionX * directionX + directionY * directionY);
+                    directionX /= distance;
+                    directionY /= distance;
+
+                    // Update the velocity of the red and green balls
+                    ball.dx += directionX * ball.delta;
+                    ball.dy += directionY * ball.delta;
+                }
+
+                if ((ball.x + ball.dx) < 0 || (ball.x + ball.dx) > canvas.width) ball.dx *= -1;
+                if ((ball.y + ball.dy) < 0 || (ball.y + ball.dy) > canvas.height) ball.dy *= -1;
+
+                ball.x += ball.dx;
+                ball.y += ball.dy;
+
+                cxt.beginPath();
+                cxt.arc(ball.x, ball.y, ball.radius, 0, 2 * Math.PI, false);
+                cxt.fillStyle = ball.color;
+                cxt.fill();
+            }
+
+        }
     </script>
 </body>
 
